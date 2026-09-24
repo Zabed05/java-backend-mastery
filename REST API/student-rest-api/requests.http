@@ -1,0 +1,8 @@
+POST http://localhost:8080/student-rest-api/students
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Akash",
+  "email": "akash@gmail.com"
+}
