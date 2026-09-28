@@ -31,4 +31,25 @@ public class StudentDAO {
         }
         return null;
     }
+
+    public Student updateStudent(int id, Student updatedStudent){
+        for(Student student : students){
+            if(student.getId() == id){
+                student.setName(updatedStudent.getName());
+                student.setEmail(updatedStudent.getEmail());
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteStudent(int id){
+        for(Student student : students){
+            if(student.getId() == id){
+                students.remove(student);
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -88,4 +88,95 @@ public class StudentServlet extends HttpServlet {
 
         objectMapper.writeValue(response.getWriter(), student);
     }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String pathInfo = request.getPathInfo();
+
+        if (pathInfo == null || pathInfo.length() <= 1) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setContentType("application/json");
+            response.getWriter().write(
+                    "{\"error\":\"Student ID is required\"}"
+            );
+            return;
+        }
+
+        int id;
+
+        try {
+            id = Integer.parseInt(pathInfo.substring(1));
+        }
+        catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setContentType("application/json");
+            response.getWriter().write(
+                    "{\"error\":\"Student ID must be a number\"}"
+            );
+            return;
+        }
+
+        Student updatedStudent = objectMapper.readValue(request.getReader(), Student.class);
+
+        Student student = studentService.updateStudent(id, updatedStudent);
+
+        if (student == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setContentType("application/json");
+            response.getWriter().write(
+                    "{\"error\":\"Student not found\"}"
+            );
+            return;
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        objectMapper.writeValue(response.getWriter(), student);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String pathInfo = request.getPathInfo();
+
+        // DELETE /students/{id}
+        if (pathInfo == null || pathInfo.length() <= 1) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setContentType("application/json");
+            response.getWriter().write(
+                    "{\"error\":\"Student ID is required\"}"
+            );
+            return;
+        }
+
+        int id;
+
+        try {
+            id = Integer.parseInt(pathInfo.substring(1));
+        }
+        catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setContentType("application/json");
+            response.getWriter().write(
+                    "{\"error\":\"Student ID must be a number\"}"
+            );
+            return;
+        }
+
+        boolean deleted = studentService.deleteStudent(id);
+
+        if (!deleted) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setContentType("application/json");
+            response.getWriter().write(
+                    "{\"error\":\"Student not found\"}"
+            );
+            return;
+        }
+
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    }
 }

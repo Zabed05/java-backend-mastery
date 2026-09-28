@@ -24,4 +24,12 @@ public class StudentService {
     public Student getStudentById(int id) {
         return studentDAO.getStudentById(id);
     }
+
+    public Student updateStudent(int id, Student updatedStudent){
+        return studentDAO.updateStudent(id, updatedStudent);
+    }
+
+    public boolean deleteStudent(int id){
+        return studentDAO.deleteStudent(id);
+    }
 }
