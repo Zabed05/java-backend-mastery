@@ -1,0 +1,18 @@
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
+    <session-factory>
+
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/student_db</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">******</property>
+
+<!--        <property name="hibernate.hbm2ddl.auto">create</property>  For creating Table automatically in Database,
+            Whenever we run the program it Creates a new table means it drop previous
+            So we have to use "update" -->
+
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+<!--        <property name="hibernate.show_sql">true</property> If you want to see the query in the console-->
+
+    </session-factory>
+</hibernate-configuration>
