@@ -18,6 +18,13 @@ This repository documents my journey of learning Java backend technologies, from
 - [Servlets](./Servlets)  
   Java web development concepts using Servlets.
 
+- [REST API](./REST%20API)  
+  Building database-backed REST APIs and working with HTTP requests and responses.
+
+- [Hibernate](./Hibernate)  
+  Object-Relational Mapping (ORM) and database operations using Hibernate.
+
+
 More backend concepts and projects will be added as I continue learning.
 
 ## 🛠️ Tech Stack
